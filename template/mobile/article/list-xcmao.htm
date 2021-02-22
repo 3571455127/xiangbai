@@ -1,0 +1,67 @@
+{template 'header'}
+<?php
+    $chongwumao=get_fields('chongwumao'); 
+//print_r($chongwumao);
+?>
+<div id="head-bar">
+<div class="head-bar">
+<div class="head-bar-back">
+<!--<a href="javascript;" onClick="javascript:history.back(-1);" data-direction="reverse"><img src="{DT_MOB}static/img/icon-back.png" width="24" height="24"/><span>返回</span></a>-->
+<a href="{DT_MOB}"><img src="{DT_MOB}static/img/icon-back.png" width="24" height="24"/><span>返回</span></a>
+<!--<a href="{$back_link}" data-direction="reverse"><img src="{DT_MOB}static/img/icon-back.png" width="24" height="24"/><span>返回</span></a>-->
+</div>
+<div class="head-bar-title">{$head_name}</div>
+<div class="head-bar-right">
+<a href="javascript:Dsheet('<a href=&#34;{DT_MOB}api/search.php?mid={$moduleid}&#34;><span>{$MOD[name]}搜索</span></a>|<a href=&#34;{DT_MOB}api/category.php?moduleid={$moduleid}&#34;><span>按分类浏览</span></a>|<a href=&#34;{DT_MOB}api/area.php?moduleid={$moduleid}&#34;><span>按地区浏览</span></a>|<a href=&#34;{$MOD[mobile]}&#34; data-direction=&#34;reverse&#34;><span>{$MOD[name]}首页</span></a>', '取消');"><img src="{DT_MOB}static/img/icon-action.png" width="24" height="24"/></a>
+</div>
+</div>
+<div class="head-bar-fix"></div>
+</div>
+<div>
+    <div class="ui-form">
+<form action="{DT_MOB}guestbook/index.php" method="post" data-ajax="false" onsubmit="return check();">
+<input type="hidden" name="action" value="add"/>
+<input type="hidden" name="post[type]" size="10" id="type" value="{$catname}"/>
+<input type="hidden" name="post[ftype]" size="10" id="type" value="chongwumao"/>
+<input name="forward" type="hidden" value="{DT_MOB}xuanchong/list.php?catid={$catid}"/>
+<div>
+    {loop $chongwumao $v}
+    {if $v['html']=='text'}
+<p>{$v['title']}{if $v['input_limit']}<em>*</em>{/if}<b id="d{$v['name']}"></b></p>
+<div><input type="{$v['html']}" name="post[{$v['name']}]" id="{$v['name']}" value="" placeholder="{$v['note']}"/></div>
+    {elseif  $v['html']=='textarea'}
+<p>{$v['title']}{if $v['input_limit']}<em>*</em>{/if}<b id="d{$v['name']}"></b></p>
+<div><textarea name="post[{$v['name']}]" id="{$v['name']}"  placeholder="{$v['note']}"></textarea></div>
+    {/if}
+{/loop}
+<p>验证码<em>*</em><b id="dcaptcha"></b></p>
+<div>{template 'captcha', 'chip'}</div>
+<div class="blank-16"></div>
+<input type="submit" name="submit" class="btn-green" value="提交留言"/>
+<div class="blank-32"></div>
+</div>
+{$cont}
+</div>
+<script type="text/javascript">
+function check() {
+	var l;
+	var f;
+        {loop $chongwugou $v}
+	f = '{$v['name']}';
+	l = Dd(f).value.length;
+        {if $v['input_limit']}
+            if(l<3){
+		Dmsg("{$v['note']}", f);
+		return false;
+            }
+        {/if}
+        {/loop}
+	f = 'captcha';
+	if($('#c'+f).html().indexOf('ok.png') == -1) {
+		Dmsg('请填写验证码', f);
+		return false;
+	}
+	return true;
+}
+</script>
+{template 'footer'}

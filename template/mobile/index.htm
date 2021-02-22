@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    {if $head_keywords}
+<meta name="keywords" content="{$head_keywords}"/>
+{/if}
+{if $head_description}
+<meta name="description" content="{$head_description}"/>
+{/if}
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta name="wap-font-scale" content="no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="Robots" content="all">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link href="" rel="apple-touch-icon-precomposed">
+    <link rel="shortcut icon" href="{$CFG['url']}favicon.ico" type="image/x-icon" />
+    <title>{if $seo_title}
+        {$seo_title}
+    {else}
+        {if $head_name}
+            {$head_name}
+         {/if}
+         {if $city_sitename}
+            {$city_sitename}
+         {else}
+            {$site_name}
+         {/if}
+    {/if}</title>
+    <!-- css -->
+<!--<link rel="stylesheet" type="text/css" href="{DT_MOB}static/lib/jquery/jquery.mobile.custom.structure.min.css"/>-->
+<link rel="stylesheet" type="text/css" href="{DT_MOB}static/style.css"/>
+    <link rel="stylesheet" href="{DT_MOB}static/xb/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{DT_MOB}static/xb/css/swiper.min.css">
+    <link rel="stylesheet" href="{DT_MOB}static/xb/css/icon-font.css">
+    <link rel="stylesheet" href="{DT_MOB}static/xb/css/weui.min.css">
+    <link rel="stylesheet" href="{DT_MOB}static/xb/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="{DT_MOB}static/xb/css/main.css">
+    
+<script type="text/javascript" src="{DT_MOB}static/xb/js/jquery.min.js"></script>
+
+<script type="text/javascript" src="{DT_MOB}static/js/common.js"></script>
+</head>
+
+<body>
+<div class="ui-toast"></div>
+<div class="ui-mask"></div>
+<div class="ui-sheet"></div>
+    <!-- header  -->
+    <header>
+        <div class="shop-topbar">
+            <a class="logo" href="" title="">
+                <!--<img src="{DT_MOB}static/xb/images/logo.jpg" alt="">--> 
+                <img src="{if $MODULE[$moduleid][logo]}{DT_SKIN}image/logo_{$moduleid}.gif{elseif $DT[logo]}{$DT[logo]}{else}{DT_SKIN}image/logo.gif{/if}" alt="{$DT[sitename]}"/>
+            </a>
+            <h3>{$head_name}</h3>
+<!--            <div class="box">
+                <i class="iconfont icon-diandiandian"></i>
+                <i class="iconfont icon-yuandian"></i>
+            </div>-->
+        </div>
+        <!-- search -->
+        <div class="header-search">
+            <form action="/mobile/api/search.php"  id="dform">
+                <input type="hidden" name="mid" value="16"/>
+                <input type="search" name="kw" placeholder="搜索" id="kw">
+                <i class="iconfont icon-seach" onclick="Dsearch();"></i>
+            </form>
+        </div>
+    </header>
+<!--{php $gg1=tag("table=ad&condition=pid=1 and status=3&order=listorder ASC&template=null")}-->
+    <!-- banner  -->
+    <div class="index-banner main">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+        {loop $gg1 $v}
+                <div class="swiper-slide">
+<a href='{$v[url]}' title='{$v[title]}'><img src="{$v[image_src]}" alt="{$v[title]}"></a>
+
+                </div>
+        {/loop}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <!-- nav -->
+    <div class="index-nav main">
+       <!--{php $gg2=tag("table=ad&condition=pid=26 and status=3&order=listorder ASC&template=null")}-->
+       {loop $gg2 $v}
+        <a href='{$v[url]}' title='{$v[title]}'>
+            <div class="box-img"><img src="{$v[image_src]}" alt="{$v[title]}"></div><span>{$v[title]}</span>
+        </a>
+        {/loop}
+    </div>
+
+    <!-- index -->
+    <div class="index main">
+        <div class="index-product">
+            <div class="title">
+                <p>Producing area</p>
+                <h3>产区</h3>
+            </div>
+
+            <div class="list">
+        <!--{php $catelist=tag("table=category&condition=moduleid=16 and isshow=1 and parentid=0&order=listorder ASC&template=null")}-->
+        {loop $catelist $v}
+                <a href="{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}" title="{$v[catname]}">
+                    <div class="box-img">
+                        <img class="lazyload" src="{DT_MOB}static/xb/images/loading.gif" data-src="{$v[thumb]}" />
+                    </div>
+                    <div class="txt">
+                        <p>{$v[catename]}</p>
+                        <div class="address">
+                            <span>{$v[catname]}</span>
+                            <i class="iconfont icon-_righticon"></i>
+                        </div>
+                    </div>
+                </a>
+        {/loop}
+            </div>
+        </div>
+    </div>
+
+{template 'footer'}

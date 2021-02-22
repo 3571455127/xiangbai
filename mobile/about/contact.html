@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta name="wap-font-scale" content="no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="Robots" content="all">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link href="" rel="apple-touch-icon-precomposed">
+    <link rel="shortcut icon" href="http://baixiang.com/favicon.ico" type="image/x-icon" />
+    <title>                             香百庭酒业d
+             </title>
+    <!-- css -->
+<!--<link rel="stylesheet" type="text/css" href="http://baixiang.com/mobile/static/lib/jquery/jquery.mobile.custom.structure.min.css"/>-->
+<link rel="stylesheet" type="text/css" href="http://baixiang.com/mobile/static/style.css"/>
+    <link rel="stylesheet" href="http://baixiang.com/mobile/static/xb/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://baixiang.com/mobile/static/xb/css/swiper.min.css">
+    <link rel="stylesheet" href="http://baixiang.com/mobile/static/xb/css/icon-font.css">
+    <link rel="stylesheet" href="http://baixiang.com/mobile/static/xb/css/weui.min.css">
+    <link rel="stylesheet" href="http://baixiang.com/mobile/static/xb/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="http://baixiang.com/mobile/static/xb/css/main.css">
+<script type="text/javascript" src="http://baixiang.com/mobile/static/xb/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).bind("mobileinit", function() {
+　　$.mobile.defaultPageTransition = 'slide';
+});
+var Dbrowser = '',AJPath = 'http://baixiang.com/mobile/ajax.php',DTPath = 'http://baixiang.com/',DTMob = 'http://baixiang.com/mobile/';
+if(!('ontouchend' in document) && window.location.href.indexOf('device.php') == -1) window.location='http://baixiang.com/mobile/api/device.php?uri=http%3A%2F%2Fbaixiang.com%2Fabout%2Fcontact.html';
+</script>
+<script type="text/javascript" src="http://baixiang.com/mobile/static/js/common.js"></script>
+</head>
+<body>
+<div class="ui-toast"></div>
+<div class="ui-mask"></div>
+<div class="ui-sheet"></div><div id="head-bar">
+<div class="head-bar">
+<div class="head-bar-back">
+<a href="http://baixiang.com/mobile/api/about.php?item=1" data-direction="reverse"><img src="http://baixiang.com/mobile/static/img/icon-back.png" width="24" height="24"/><span>返回</span></a>
+</div>
+<div class="head-bar-title">联系方式</div>
+</div>
+<div class="head-bar-fix"></div>
+</div>
+<div class="main">
+<div class="content">
+联系方式</div>
+</div>
+<script type="text/javascript">
+function Dsearch() {
+if(Dd('kw').value.length < 2) {
+Dtoast('请输入关键词');
+return false;
+}
+Dd('dform').submit();
+}
+function Dclear() {
+$.post('?', {'action':'clear'}, function(data) {
+if(data == 'ok') {
+Dtoast('清理成功');
+setTimeout(function() {
+window.location.reload();
+}, 1000);
+} else {
+Dtoast('操作失败');
+}
+});
+}
+</script>
+</body>
+</html>
