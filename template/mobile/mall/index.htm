@@ -1,56 +1,116 @@
 {template 'header'}
-    <div class="pro-cate">
-        <div class="procate-top">
-            <div class="back-top">
-                <a href="{DT_MOB}" title="{$head_name}">
-                    <i class="iconfont icon-left"></i>
-                    <span>{$head_name}</span>
-                </a>
-            </div>
-            <div class="header-search">
-            <form action="/mobile/api/search.php"  id="dform">
-                <input type="hidden" name="mid" value="16"/>
+<div class="pro-cate">
+    <div class="procate-top">
+        <div class="back-top">
+            <a href="{DT_MOB}" title="{$head_name}">
+                <i class="iconfont icon-left"></i>
+                <span>{$head_name}</span>
+            </a>
+        </div>
+        <div class="header-search">
+            <form action="/mobile/api/search.php" id="dform">
+                <input type="hidden" name="mid" value="16" />
                 <input type="search" name="kw" placeholder="搜索" id="kw">
                 <i class="iconfont icon-seach" onclick="Dsearch();"></i>
             </form>
-            </div>
         </div>
+    </div>
 
-        <div class="procate-content main">
-            <div class="procate-list" data-ydui-scrolltab>
-                <div class="scrolltab-nav">
-                    {php $mid = $moduleid;}
-				{php $child = get_maincat(0, $mid, 1);}
-				{loop $child $i $c}
-				{if $i<10 && $c[child]}
-                    <a href="javascript:;" title="{set_style($c[catname], $c[style])}" class="scrolltab-item crt {if $catid==$c[catid]}active{/if}">
-                        <div class="scrolltab-title">{set_style($c[catname], $c[style])}</div>
+    <div class="procate-content main">
+        <div class="procate-list" data-ydui-scrolltab>
+            <div class="scrolltab-nav">
+                {php $mid = $moduleid;}
+                {php $child = get_maincat(0, $mid, 1);}
+                {loop $child $i $c}
+                {if $i<10 && $c[child]} <a href="javascript:;" title="{set_style($c[catname], $c[style])}"
+                    class="scrolltab-item crt {if $catid==$c[catid]}active{/if}">
+                    <div class="scrolltab-title">{set_style($c[catname], $c[style])}</div>
                     </a>
-				{/if}
-				{/loop}
-                    
-                </div>
-                <div class="scrolltab-content">
-                    {loop $child $i $c}
-				{if $i<10 && $c[child]}
-                    {php $sub = get_maincat($c[catid], $mid, 1);}
-                    <div class="scrolltab-content-item" data-ydui-slider>
-                        {loop $sub $j $s}
-                        <a href="{$MODULE[$mid][linkurl]}{$s[linkurl]}" title="{$s[catname]}">
-                            <div class="box-img">
-                                <img class="lazyload" src="{DT_MOB}static/xb/images/proc01.png" data-src="{$s[thumb]}" alt="{$s[catname]}">
-                            </div>
-                            <h5>{set_style($s[catname], $c[style])}</h5>
-                        </a>
-                        {/loop}
-                    </div>
-				{/if}
+                    {/if}
                     {/loop}
-                </div>
-            </div>
 
-            
+            </div>
+            <div class="scrolltab-content">
+                {loop $child $i $c}
+                {if $i<10 && $c[child]} {php $sub=get_maincat($c[catid], $mid, 1);} <div class="scrolltab-content-item"
+                    data-ydui-slider>
+                    {loop $sub $j $s}
+                    <a href="{$MODULE[$mid][linkurl]}{$s[linkurl]}" title="{$s[catname]}">
+                        <div class="box-img">
+                            <img class="lazyload" src="{DT_MOB}static/xb/images/proc01.png" data-src="{$s[thumb]}"
+                                alt="{$s[catname]}">
+                        </div>
+                        <h5>{set_style($s[catname], $c[style])}</h5>
+                    </a>
+                    {/loop}
+            </div>
+            {/if}
+            {/loop}
         </div>
+
+        <!-- 修改后 -->
+        <!-- <div class="procate-list2">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#home" data-toggle="tab">法国 布根地</a></li>
+                <li><a href="#profile" data-toggle="tab">法国 波尔多</a></li>
+
+            </ul>
+
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                 
+                    <a href="" title="">
+                        <div class="box-img">
+                            <img class="lazyload" src="http://xiangbai.com/mobile/static/xb/images/proc01.png"
+                                data-src="{$s[thumb]}" alt="{$s[catname]}">
+                        </div>
+                        <h5>{set_style($s[catname], $c[style])}</h5>
+                    </a>
+                   
+                    
+                    <a href="" title="">
+                        <div class="box-img">
+                            <img class="lazyload" src="http://xiangbai.com/mobile/static/xb/images/proc02.png"
+                                data-src="{$s[thumb]}" alt="{$s[catname]}">
+                        </div>
+                        <h5>{set_style($s[catname], $c[style])}</h5>
+                    </a>
+                    <a href="" title="">
+                        <div class="box-img">
+                            <img class="lazyload" src="http://xiangbai.com/mobile/static/xb/images/proc03.png"
+                                data-src="{$s[thumb]}" alt="{$s[catname]}">
+                        </div>
+                        <h5>{set_style($s[catname], $c[style])}</h5>
+                    </a>
+                   
+                    <a href="" title="">
+                        <div class="box-img">
+                            <img class="lazyload" src="http://xiangbai.com/mobile/static/xb/images/proc04.png"
+                                data-src="{$s[thumb]}" alt="{$s[catname]}">
+                        </div>
+                        <h5>{set_style($s[catname], $c[style])}</h5>
+                    </a>
+
+                    <a href="" title="">
+                        <div class="box-img">
+                            <img class="lazyload" src="http://xiangbai.com/mobile/static/xb/images/proc01.png"
+                                data-src="{$s[thumb]}" alt="{$s[catname]}">
+                        </div>
+                        <h5>{set_style($s[catname], $c[style])}</h5>
+                    </a>
+
+                </div>
+                <div class="tab-pane" id="profile">456
+                </div>
+
+            </div>
+        </div> -->
 
     </div>
+
+
+</div>
+
+</div>
 {template 'footer'}

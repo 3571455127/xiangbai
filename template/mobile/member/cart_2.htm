@@ -1,233 +1,233 @@
-{template 'header'}
-    <div class="cart main" style="    background: none;">
-
-        <div class="back-top">
-            <a href="{$back_link}" title="购物车">
-                <i class="iconfont icon-left"></i>
-                <span>购物车</span>
-            </a>
-        </div>
-
-        <div class="shop-header disflex">
-            <div class="left">
-                共<span class="all-number" id="total_good">0</span>件商品
-                <!--<b id="total_good" style="display: none;"></b>-->
-            </div>
-            {if $lists}<a href="javascript:move_muti();" class="right edit" >编辑</a>{/if}
-        </div>
-        <div class="goods-group">
-            <div class="list">
-                {if $lists}
-<form method="post" action="buy.php" id="subbuy" onsubmit="return Mcheck();">
-<input type="hidden" name="from" value="cart"/>
-<input type="hidden" name="mid" value="{$mid}"/>
-{loop $lists $tags}
-{loop $tags $i $t}
-{if $i == 0}
-<div class="box">
-    <div class="ckb disflex">
-        <label>
-        <input type="checkbox" checked="checked" id="check-{$t[username]}" onclick="Ccheck('{$t[username]}');calculate();" data-check="{$t[username]}"/>
-        <i class="iconfont"></i>
-        </label>
-    </div>
-
-{php $promos = get_promos($t[username]);}
-{if $promos}
-<a href="{$MODULE[2][mobile]}coupon.php?username={$t[username]}" target="_blank"><span>优惠券</span></a>
-{/if}
-<s id="total-{$t[username]}" data-user="{$t[username]}">0.00</s>
-
-</div>
-
-
-{/if}
-<input type="hidden" id="a1_{$t[key]}" value="{$t[a1]}"/>
-<input type="hidden" id="a2_{$t[key]}" value="{$t[a2]}"/>
-<input type="hidden" id="a3_{$t[key]}" value="{$t[a3]}"/>
-<input type="hidden" id="p1_{$t[key]}" value="{$t[p1]}"/>
-<input type="hidden" id="p2_{$t[key]}" value="{$t[p2]}"/>
-<input type="hidden" id="p3_{$t[key]}" value="{$t[p3]}"/>
-<input type="hidden" id="amount_{$t[key]}" value="{$t[amount]}"/>
-
-<div class="box">
-<div class="ckb disflex">
-    <label>
-        <input type="checkbox" name="cart[]" value="{$t[key]}" checked="checked" onclick="calculate()" id="check_{$t[key]}" data-check="{$t[username]}"/>
-        <i></i></label>
-</div>
-
-<a href="{$t[moburl]}" title="{$t[alt]}">
-    <div class="box-right">
-        <div class="box-img"><img src="{if $t[thumb]}{$t[thumb]}{else}static/img/nopic-60.png{/if}" alt="{$t[alt]}"></div>
-        <div class="txt">
-            <div>
-                <div class="title">{$t[alt]}</div>
-                <div class="price-box">
-                    <span>{$DT[money_sign]}</span>
-                    <span class="price" id="price_{$t[key]}">
-                        {if $salespricea}
-                    {intval($t[price]*$salespricea)}
-                    {else}
-                    {$t[price]}
-                    {/if}
-                    </span>
-                   <span class="price"> {if isset($t[unit]) && $t[unit]}/{$t[unit]}{/if}</span>
-                </div>
-            </div>
-            <div class="opera">
-                <span class="sub sub-disabled a1" onclick="alter('{$t[key]}', '-');"></span>
-                <input type="tel" class="numchange" name="amounts[{$t[key]}]" value="{$t[a]}" id="number_{$t[key]}" onblur="calculate();"/>
-                <span class="plus a3" onclick="alter('{$t[key]}', '+');"></span>
-            </div>
-	<s id="total_{$t[key]}" total-{$t[username]}="1">{$t[price]}</s>
-        </div>
-    </div>
-</a>
-</div>
-{/loop}
-{/loop}
-            </div>
-        </div>
-        <div class="cart-bottom">
-            <div class="select-all">
-                <div class="boxs">
-                    <label>
-                    <input type="checkbox" checked="checked" id="check-all" onclick="Ccheck();calculate();"/>
-                    <i></i>
-                    </label>
-                    <span>全选</span>
-                </div>
-            </div>
-            <div class="button-wrap">
-                <div class="total-price">
-                    <p>合计：<span class="ico-rmb">¥</span>
-                        <span class="all-price" id="total_amount"></span>
-                    </p>
-                    <!--<p class="desc"> 不含运费 </p>-->
-                </div>
-                <button class="product-sett" onclick="$('#subbuy').submit();">结算</button>
-            </div>
-        </div>
-
-
-</form>
-{else}
-<div class="main">
-	<div class="content"><br/><br/><center>您的 <span class="f_orange">购物车</span> 还是空的，赶快行动吧！<br/><br/>马上去 <a href="{$MOD[mobile]}" class="b">挑选商品</a></center><br/><br/></div>
-</div>
-{/if}
-
-    </div>
-</body>
-<script type="text/javascript">
-function Ccheck(key) {
-	$(key ? '[data-check="'+key+'"]' : '[data-check]').each(function(){
-		$(this).prop('checked', $('#check-'+(key ? key : 'all')).prop('checked') ? true : false);
-	});
-}
-function Mcheck() {
-	if(Dd('total_good').innerHTML == '0') {
-		alert('最少需要挑选1件商品');
-		window.scroll(0, 0);
-		return false;
-	}
-    return true;
-}
-function move_muti() {
-	if(Dd('total_good').innerHTML == '0') {
-		alert('未选择商品');
-		return;
-	}
-	if(confirm('确定要删除选中商品吗？')) {
-		var par = 'action=delete&mid={$mid}&ajax=1';
-		$(':checked').each(function(i) {
-			if($(this).attr('id').indexOf('check_') != -1) {
-				par += '&key[]='+$(this).val();
-			}
-		});		
-		$.post('?', par, function(data) {
-			Go('?mid={$mid}&rand={$DT_TIME}');
-		});
-	}
-}
-function move(i) {
-	Dd('check_'+i).checked = false;
-	Dd('check_'+i).disabled = true;
-	Dh('tr_'+i);
-	calculate();
-	$.post('?', 'action=delete&mid={$mid}&ajax=1&key='+i, function(data) {
-		var cart_num = get_cart();
-		$('#destoon_cart').html(cart_num > 0 ? '<strong>'+cart_num+'</strong>' : '0');
-		if(data == 1 && Dd('total_good').innerHTML == '0') Go('?mid={$mid}&rand={$DT_TIME}');
-	});
-}
-function alter(i, t) {
-	if(t == '+') {
-		var maxa = parseFloat(Dd('amount_'+i).value);
-		if(maxa && Dd('number_'+i).value >= maxa) return;
-		Dd('number_'+i).value =  parseInt(Dd('number_'+i).value) + 1;
-	} else {
-		var mina = parseFloat(Dd('a1_'+i).value);
-		if(Dd('number_'+i).value <= mina) return;
-		Dd('number_'+i).value = parseInt(Dd('number_'+i).value) - 1;
-	}
-	calculate();
-}
-function get_price(i) {
-	if(Dd('a2_'+i).value > 0) {
-		if(Dd('a3_'+i).value > 1 && parseInt(Dd('number_'+i).value) > parseInt(Dd('a3_'+i).value)) return Dd('p3_'+i).value;
-		if(Dd('a2_'+i).value > 1 && parseInt(Dd('number_'+i).value) > parseInt(Dd('a2_'+i).value)) return Dd('p2_'+i).value;
-	}
-	return Dd('p1_'+i).value
-}
-function calculate() {
-	var _good = _amount = _total = 0;
-	$(':checked').each(function(i) {
-		if($(this).attr('id').indexOf('check_') != -1) {
-			var key = $(this).val();
-			var num, good, maxa, mina, price;
-			num = parseInt(Dd('number_'+key).value);
-			maxa = parseInt(Dd('amount_'+key).value);
-			mina = parseInt(Dd('a1_'+key).value);
-			if(num < mina) Dd('number_'+key).value = num = mina;
-			if(num > maxa) Dd('number_'+key).value = num = maxa;
-			if(isNaN(num) || num < 0) Dd('number_'+key).value = num = mina;
-			_good++;
-			price = parseFloat(get_price(key));
-                        var salespricea = 0;
-                         {if $salespricea}
-                         salespricea = {$salespricea};
-                         price = price*salespricea;
-                         {/if}
-			_total = price*num;
-			_amount += _total;
-			Dd('price_'+key).innerHTML = price.toFixed(2);
-			Dd('total_'+key).innerHTML = _total.toFixed(2);
-		}
-	});
-        alert(_amount);
-	Dd('total_good').innerHTML = _good;
-	Dd('total_amount').innerHTML = _amount.toFixed(2);
-      alert(Dd('total_amount').innerHTML);
-	$('[data-user]').each(function() {
-		var user = $(this).attr('data-user');
-		var tt = 0;
-		$('[total-'+user+']').each(function() {
-			tt += parseFloat($(this).html());
-		});
-		$(this).html(tt.toFixed(2));
-	});
-}
-{if $lists}$(function(){calculate();});{/if}
-</script>
-<!-- js -->
-<script type="text/javascript" src="{DT_MOB}static/xb/js/jquery-weui.min.js"></script>
-<script type="text/javascript" src="{DT_MOB}static/xb/js/bootstrap.min.js"></script>
-<!-- iOS 系统下默认的 click 事件会有300毫秒的延迟，可以使用 fastclick 来消除这个延迟。 -->
-<script type="text/javascript" src="{DT_MOB}static/xb/js/fastclick.js"></script>
-<script type="text/javascript" src="{DT_MOB}static/xb/js/lazyload.min.js"></script>
-<script type="text/javascript" src="{DT_MOB}static/xb/js/swiper.min.js"></script>
-<script type="text/javascript" src="{DT_MOB}static/xb/js/main.js"></script>
-
+{template 'header'}
+    <div class="cart main" style="    background: none;">
+
+        <div class="back-top">
+            <a href="{$back_link}" title="购物车">
+                <i class="iconfont icon-left"></i>
+                <span>购物车</span>
+            </a>
+        </div>
+
+        <div class="shop-header disflex">
+            <div class="left">
+                共<span class="all-number" id="total_good">0</span>件商品
+                <!--<b id="total_good" style="display: none;"></b>-->
+            </div>
+            {if $lists}<a href="javascript:move_muti();" class="right edit" >编辑</a>{/if}
+        </div>
+        <div class="goods-group">
+            <div class="list">
+                {if $lists}
+<form method="post" action="buy.php" id="subbuy" onsubmit="return Mcheck();">
+<input type="hidden" name="from" value="cart"/>
+<input type="hidden" name="mid" value="{$mid}"/>
+{loop $lists $tags}
+{loop $tags $i $t}
+{if $i == 0}
+<div class="box">
+    <div class="ckb disflex">
+        <label>
+        <input type="checkbox" checked="checked" id="check-{$t[username]}" onclick="Ccheck('{$t[username]}');calculate();" data-check="{$t[username]}"/>
+        <i class="iconfont"></i>
+        </label>
+    </div>
+
+{php $promos = get_promos($t[username]);}
+{if $promos}
+<a href="{$MODULE[2][mobile]}coupon.php?username={$t[username]}" target="_blank"><span>优惠券</span></a>
+{/if}
+<s id="total-{$t[username]}" data-user="{$t[username]}">0.00</s>
+
+</div>
+
+
+{/if}
+<input type="hidden" id="a1_{$t[key]}" value="{$t[a1]}"/>
+<input type="hidden" id="a2_{$t[key]}" value="{$t[a2]}"/>
+<input type="hidden" id="a3_{$t[key]}" value="{$t[a3]}"/>
+<input type="hidden" id="p1_{$t[key]}" value="{$t[p1]}"/>
+<input type="hidden" id="p2_{$t[key]}" value="{$t[p2]}"/>
+<input type="hidden" id="p3_{$t[key]}" value="{$t[p3]}"/>
+<input type="hidden" id="amount_{$t[key]}" value="{$t[amount]}"/>
+
+<div class="box">
+<div class="ckb disflex">
+    <label>
+        <input type="checkbox" name="cart[]" value="{$t[key]}" checked="checked" onclick="calculate()" id="check_{$t[key]}" data-check="{$t[username]}"/>
+        <i></i></label>
+</div>
+
+<a href="{$t[moburl]}" title="{$t[alt]}">
+    <div class="box-right">
+        <div class="box-img"><img src="{if $t[thumb]}{$t[thumb]}{else}static/img/nopic-60.png{/if}" alt="{$t[alt]}"></div>
+        <div class="txt">
+            <div>
+                <div class="title">{$t[alt]}</div>
+                <div class="price-box">
+                    <span>{$DT[money_sign]}</span>
+                    <span class="price" id="price_{$t[key]}">
+                        {if $salespricea}
+                    {intval($t[price]*$salespricea)}
+                    {else}
+                    {$t[price]}
+                    {/if}
+                    </span>
+                   <span class="price"> {if isset($t[unit]) && $t[unit]}/{$t[unit]}{/if}</span>
+                </div>
+            </div>
+            <div class="opera">
+                <span class="sub sub-disabled a1" onclick="alter('{$t[key]}', '-');"></span>
+                <input type="tel" class="numchange" name="amounts[{$t[key]}]" value="{$t[a]}" id="number_{$t[key]}" onblur="calculate();"/>
+                <span class="plus a3" onclick="alter('{$t[key]}', '+');"></span>
+            </div>
+	<s id="total_{$t[key]}" total-{$t[username]}="1">{$t[price]}</s>
+        </div>
+    </div>
+</a>
+</div>
+{/loop}
+{/loop}
+            </div>
+        </div>
+        <div class="cart-bottom">
+            <div class="select-all">
+                <div class="boxs">
+                    <label>
+                    <input type="checkbox" checked="checked" id="check-all" onclick="Ccheck();calculate();"/>
+                    <i></i>
+                    </label>
+                    <span>全选</span>
+                </div>
+            </div>
+            <div class="button-wrap">
+                <div class="total-price">
+                    <p>合计：<span class="ico-rmb">¥</span>
+                        <span class="all-price" id="total_amount"></span>
+                    </p>
+                    <!--<p class="desc"> 不含运费 </p>-->
+                </div>
+                <button class="product-sett" onclick="$('#subbuy').submit();">结算</button>
+            </div>
+        </div>
+
+
+</form>
+{else}
+<div class="main">
+	<div class="content"><br/><br/><center>您的 <span class="f_orange">购物车</span> 还是空的，赶快行动吧！<br/><br/>马上去 <a href="{$MOD[mobile]}" class="b">挑选商品</a></center><br/><br/></div>
+</div>
+{/if}
+
+    </div>
+</body>
+<script type="text/javascript">
+function Ccheck(key) {
+	$(key ? '[data-check="'+key+'"]' : '[data-check]').each(function(){
+		$(this).prop('checked', $('#check-'+(key ? key : 'all')).prop('checked') ? true : false);
+	});
+}
+function Mcheck() {
+	if(Dd('total_good').innerHTML == '0') {
+		alert('最少需要挑选1件商品');
+		window.scroll(0, 0);
+		return false;
+	}
+    return true;
+}
+function move_muti() {
+	if(Dd('total_good').innerHTML == '0') {
+		alert('未选择商品');
+		return;
+	}
+	if(confirm('确定要删除选中商品吗？')) {
+		var par = 'action=delete&mid={$mid}&ajax=1';
+		$(':checked').each(function(i) {
+			if($(this).attr('id').indexOf('check_') != -1) {
+				par += '&key[]='+$(this).val();
+			}
+		});		
+		$.post('?', par, function(data) {
+			Go('?mid={$mid}&rand={$DT_TIME}');
+		});
+	}
+}
+function move(i) {
+	Dd('check_'+i).checked = false;
+	Dd('check_'+i).disabled = true;
+	Dh('tr_'+i);
+	calculate();
+	$.post('?', 'action=delete&mid={$mid}&ajax=1&key='+i, function(data) {
+		var cart_num = get_cart();
+		$('#destoon_cart').html(cart_num > 0 ? '<strong>'+cart_num+'</strong>' : '0');
+		if(data == 1 && Dd('total_good').innerHTML == '0') Go('?mid={$mid}&rand={$DT_TIME}');
+	});
+}
+function alter(i, t) {
+	if(t == '+') {
+		var maxa = parseFloat(Dd('amount_'+i).value);
+		if(maxa && Dd('number_'+i).value >= maxa) return;
+		Dd('number_'+i).value =  parseInt(Dd('number_'+i).value) + 1;
+	} else {
+		var mina = parseFloat(Dd('a1_'+i).value);
+		if(Dd('number_'+i).value <= mina) return;
+		Dd('number_'+i).value = parseInt(Dd('number_'+i).value) - 1;
+	}
+	calculate();
+}
+function get_price(i) {
+	if(Dd('a2_'+i).value > 0) {
+		if(Dd('a3_'+i).value > 1 && parseInt(Dd('number_'+i).value) > parseInt(Dd('a3_'+i).value)) return Dd('p3_'+i).value;
+		if(Dd('a2_'+i).value > 1 && parseInt(Dd('number_'+i).value) > parseInt(Dd('a2_'+i).value)) return Dd('p2_'+i).value;
+	}
+	return Dd('p1_'+i).value
+}
+function calculate() {
+	var _good = _amount = _total = 0;
+	$(':checked').each(function(i) {
+		if($(this).attr('id').indexOf('check_') != -1) {
+			var key = $(this).val();
+			var num, good, maxa, mina, price;
+			num = parseInt(Dd('number_'+key).value);
+			maxa = parseInt(Dd('amount_'+key).value);
+			mina = parseInt(Dd('a1_'+key).value);
+			if(num < mina) Dd('number_'+key).value = num = mina;
+			if(num > maxa) Dd('number_'+key).value = num = maxa;
+			if(isNaN(num) || num < 0) Dd('number_'+key).value = num = mina;
+			_good++;
+			price = parseFloat(get_price(key));
+                        var salespricea = 0;
+                         {if $salespricea}
+                         salespricea = {$salespricea};
+                         price = price*salespricea;
+                         {/if}
+			_total = price*num;
+			_amount += _total;
+			Dd('price_'+key).innerHTML = price.toFixed(2);
+			Dd('total_'+key).innerHTML = _total.toFixed(2);
+		}
+	});
+        alert(_amount);
+	Dd('total_good').innerHTML = _good;
+	Dd('total_amount').innerHTML = _amount.toFixed(2);
+      alert(Dd('total_amount').innerHTML);
+	$('[data-user]').each(function() {
+		var user = $(this).attr('data-user');
+		var tt = 0;
+		$('[total-'+user+']').each(function() {
+			tt += parseFloat($(this).html());
+		});
+		$(this).html(tt.toFixed(2));
+	});
+}
+{if $lists}$(function(){calculate();});{/if}
+</script>
+<!-- js -->
+<script type="text/javascript" src="{DT_MOB}static/xb/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="{DT_MOB}static/xb/js/bootstrap.min.js"></script>
+<!-- iOS 系统下默认的 click 事件会有300毫秒的延迟，可以使用 fastclick 来消除这个延迟。 -->
+<script type="text/javascript" src="{DT_MOB}static/xb/js/fastclick.js"></script>
+<script type="text/javascript" src="{DT_MOB}static/xb/js/lazyload.min.js"></script>
+<script type="text/javascript" src="{DT_MOB}static/xb/js/swiper.min.js"></script>
+<script type="text/javascript" src="{DT_MOB}static/xb/js/main.js"></script>
+
 </html>

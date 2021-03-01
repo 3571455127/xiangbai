@@ -1,80 +1,80 @@
-<script src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-<?php
-//获取微信分享配置
-$wxjsconfig = get_signature();
-?>
-<script type="text/javascript">
-
-  wx.config({
-      debug: true,
-      appId: '{$wxjsconfig['appId']}',
-      timestamp: {$wxjsconfig['timestamp']},
-      nonceStr: '{$wxjsconfig['nonceStr']}',
-      signature: '{$wxjsconfig['signature']}',
-      jsApiList: [
-        'checkJsApi',
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage',
-        'updateAppMessageShareData',
-        'updateTimelineShareData',
-        'openCard'
-      ]
-  });
-  
-wx.ready(function () {
-      
-  // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
-  document.querySelector('#checkJsApi').onclick = function () {
-    wx.checkJsApi({
-      jsApiList: [
-        'getNetworkType',
-        'onMenuShareAppMessage',
-        'updateAppMessageShareData',
-        'updateTimelineShareData',
-        'previewImage'
-      ],
-      success: function (res) {
-        alert(JSON.stringify(res));
-      }
-    });
-  };
-    // 2. 分享接口
-  // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
-//  document.querySelector('#onMenuShareAppMessage').onclick = function () {
-// 
-//  };
-   wx.checkJsApi({
-      jsApiList: [
-        'getNetworkType',
-        'onMenuShareAppMessage',
-        'updateAppMessageShareData',
-        'updateTimelineShareData',
-        'previewImage'
-      ],
-      success: function (res) {
-        alert(JSON.stringify(res));
-      }
-    });
-   wx.updateAppMessageShareData({ 
-    title: '{$title}', // 分享标题
-    desc: '{$introduce}', // 分享描述
-    link: '{$linkurl}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    imgUrl: '{$pic}', // 分享图标
-    success: function () {
-      // 设置成功
-      //alert('用户点击发送给朋友');
-    }
-  })
-wx.updateTimelineShareData({ 
-    title: '{$title}', // 分享标题
-    desc: '{$introduce}', // 分享描述
-    link: '{$linkurl}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    imgUrl: '{$pic}', // 分享图标
-    success: function () {
-      // 设置成功
-    }
-  })
-
-
-});
+<script src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<?php
+//获取微信分享配置
+$wxjsconfig = get_signature();
+?>
+<script type="text/javascript">
+
+  wx.config({
+      debug: true,
+      appId: '{$wxjsconfig['appId']}',
+      timestamp: {$wxjsconfig['timestamp']},
+      nonceStr: '{$wxjsconfig['nonceStr']}',
+      signature: '{$wxjsconfig['signature']}',
+      jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'updateAppMessageShareData',
+        'updateTimelineShareData',
+        'openCard'
+      ]
+  });
+  
+wx.ready(function () {
+      
+  // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+  document.querySelector('#checkJsApi').onclick = function () {
+    wx.checkJsApi({
+      jsApiList: [
+        'getNetworkType',
+        'onMenuShareAppMessage',
+        'updateAppMessageShareData',
+        'updateTimelineShareData',
+        'previewImage'
+      ],
+      success: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+  };
+    // 2. 分享接口
+  // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+//  document.querySelector('#onMenuShareAppMessage').onclick = function () {
+// 
+//  };
+   wx.checkJsApi({
+      jsApiList: [
+        'getNetworkType',
+        'onMenuShareAppMessage',
+        'updateAppMessageShareData',
+        'updateTimelineShareData',
+        'previewImage'
+      ],
+      success: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+   wx.updateAppMessageShareData({ 
+    title: '{$title}', // 分享标题
+    desc: '{$introduce}', // 分享描述
+    link: '{$linkurl}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    imgUrl: '{$pic}', // 分享图标
+    success: function () {
+      // 设置成功
+      //alert('用户点击发送给朋友');
+    }
+  })
+wx.updateTimelineShareData({ 
+    title: '{$title}', // 分享标题
+    desc: '{$introduce}', // 分享描述
+    link: '{$linkurl}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    imgUrl: '{$pic}', // 分享图标
+    success: function () {
+      // 设置成功
+    }
+  })
+
+
+});
 </script>

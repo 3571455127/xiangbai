@@ -1,322 +1,322 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<meta http-equiv="Content-Language" content="zh-CN">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	
-	<meta name="Robots" content="all">
-{if $head_keywords}
-<meta name="keywords" content="{$head_keywords}"/>
-{/if}
-{if $head_description}
-<meta name="description" content="{$head_description}"/>
-{/if}
-	<meta name="renderer" content="webkit">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="format-detection" content="telephone=no" />
-
-	<title>     {if $seo_title}
-        {$seo_title}
-    {else}
-        {if $head_name}
-            {$head_name}
-         {/if}
-         {if $city_sitename}
-            {$city_sitename}
-         {else}
-            {$site_name}
-         {/if}
-    {/if}</title>
-
-    <link rel="stylesheet" href="{DT_MOB}static/ucss/css/swiper.min.css">
-	<link rel="stylesheet" href="{DT_MOB}static/ucss/css/style.css" />
-	<link rel="stylesheet" href="{DT_MOB}static/ucss/css/media.css" />
-	<link rel="stylesheet" href="{DT_MOB}static/css.css" />
-
-<script type="text/javascript" src="{DT_MOB}static/ucss/js/jquery.min.js"></script>
-    <script type="text/javascript" src="{DT_MOB}static/ucss/js/script.js"></script>
-
-    <script src="{DT_MOB}static/ucss/js/swiper.min.js"></script>
-
-
-	<!--[if IE 6]>
-		<script type="text/javascript" src="script/DD_PNG.js" ></script>
-		<script type="text/javascript">
-			DD_belatedPNG.fix('div, ul, img, li, input , a');
-		</script>
-	<![endif]-->
-
-</head>
-<body>
-	<div class="header">
-		<div class="search fixed">
-<!--		<form action="" method="post">
-			<input type="submit" name="submit" value>
-			<input class="keywords" type="text" name="keywords" value="" placeholder="猫咪营养膏" />
-		</form>-->
-                    <a href="{DT_MOB}api/search.php"><input type="submit" name="submit" value>
-			<input class="keywords" type="text" name="keywords" value="" placeholder="猫咪营养膏" /></a>
-		</div>
-
-		<div class="logos fixed">
-				<!--<img class="logo" src="{DT_MOB}static/ucss/images/logo.png" alt=""/>-->
-                                <a href="{$MODULE[1][linkurl]}"><img src="{if $MODULE[$moduleid][logo]}{DT_SKIN}image/logo_{$moduleid}.gif{elseif $DT[logo]}{$DT[logo]}{else}{DT_SKIN}image/logo.gif{/if}" alt="{$DT[sitename]}"/></a>
-				<img class="logor" src="{DT_MOB}static/ucss/images/logor.png" alt=""/>
-		</div>
-	</div>
-	<div class="banner">
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <!--{php $gg1=tag("table=ad&condition=pid=1 and status=3&order=listorder ASC&template=null")}-->
-        {loop $gg1 $v}
-         <div class="swiper-slide"><a href='{$v[url]}' title='{$v[title]}'><img src="{$v[image_src]}" alt="{$v[title]}"></a></div>
-{/loop}
-    </div>
-    <div class="swiper-pagination"></div><!--分页器。如果放置在swiper-container外面，需要自定义样式。-->
-</div>
-	</div>
-	<script language="javascript"> 
-var mySwiper = new Swiper('.banner .swiper-container',{
-autoplay:true,
-loop : true,
-pagination: {
-    el: '.banner .swiper-pagination',
-  },
-})
-</script>
-<style type="text/css">
-</style>
-	<div class="acategory fixed">
-        <!--{php $acatelist=tag("table=category&condition=moduleid=23 and isshow=1&order=listorder ASC&template=null")}-->
-        {loop $acatelist $v}
-<div class="acatelist">
-			<a href='{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}' title='{$v[catname]}'>
-			<div class="img">
-				<img src="{$v[thumb]}" alt="{$v[catname]}"/>
-			</div>
-			<div class="title">
-					{$v[catname]}	
-			</div>
-			</a>
-		</div>
-{/loop}
-	</div>
-	<div class="chongshe">
-		<div class="ctitle">
-		<a href="/chongshetuijian/" title="宠舍推荐">
-				宠舍推荐
-				<span class="more">查看更多 ></span>
-		</a>
-		</div>
-		<div class="cimglist">
-
-<div id="certify">
-<div class="swiper-container">
-<div class="swiper-wrapper">
-<!--{php $chongshe=tag("table=article_24&condition=status=3 and level=1&order=paixu desc,edittime desc&template=null&pagesize=5");}-->   
-{loop $chongshe $i $t}
-<div class="swiper-slide"><a href='/chongshetuijian/{$t[linkurl]}' title='{$t[title]}'><img src="{$t[thumb]}" /><p>{$t[title]}</p></a></div>
-{/loop}
-</div>
-</div>
-<div class="swiper-pagination"></div>
-<div class="swiper-button-prev"></div>
-<div class="swiper-button-next"></div>
-</div>
-<script>
-certifySwiper = new Swiper('#certify .swiper-container', {
-	watchSlidesProgress: true,
-	slidesPerView: 'auto',
-	centeredSlides: true,
-	loop: true,
-	loopedSlides: 5,
-	autoplay: true,
-	navigation: {
-		nextEl: '#certify .swiper-button-next',
-		prevEl: '#certify .swiper-button-prev',
-	},
-	pagination: {
-		el: '#certify .swiper-pagination',
-		//clickable :true,
-	},
-	on: {
-		progress: function(progress) {
-			for (i = 0; i < this.slides.length; i++) {
-				var slide = this.slides.eq(i);
-				var slideProgress = this.slides[i].progress;
-				modify = 1;
-				if (Math.abs(slideProgress) > 1) {
-					modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
-				}
-				translate = slideProgress * modify * 260 + 'px';
-				scale = 1 - Math.abs(slideProgress) / 5;
-				zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
-				slide.transform('translateX(' + translate + ') scale(' + scale + ')');
-				slide.css('zIndex', zIndex);
-				slide.css('opacity', 1);
-				if (Math.abs(slideProgress) > 3) {
-					slide.css('opacity', 0);
-				}
-			}
-		},
-		setTransition: function(transition) {
-			for (var i = 0; i < this.slides.length; i++) {
-				var slide = this.slides.eq(i)
-				slide.transition(transition);
-			}
-
-		}
-	}
-
-})
-</script>
-
-
-		</div>
-	</div>
-	<div class="chongshe xuanfei">
-		<div class="ctitle">
-		<a href="/mall/" title="爱宠选配">
-				爱宠选配
-				<span class="more">查看更多 ></span>
-		</a>
-		</div>
-		<div class="cimglist fixed">
-                    
-        <!--{php $xuanfei=tag("table=category&condition=moduleid=16 and isshow=1&order=listorder ASC&template=null")}-->
-			<div class="cimglistl fl">
-{loop $xuanfei $k $v}
-{if $k==0}
-                          <a href="{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}" title="{$v[catname]}">
-				<div class="img"><img src="{$v[thumb]}" alt="{$v[catname]}"/></div>
-				<div class="cfont">
-					<div class="title">
-						{$v[catname]}
-					</div>
-					<div class="cont">
-						{$v[summary]}
-					</div>
-				</div>
-		</a>
-{/if}
-{/loop}  
-                            
-			</div>
-			<div class="cimglistr fl">
-				<div class="cimglistrt">
-                                    {loop $xuanfei $k $v}
-{if $k==1}
-                          <a href="{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}" title="{$v[catname]}">
-				<div class="img"><img src="{$v[thumb]}" alt="{$v[catname]}"/></div>
-				<div class="cfont">
-					<div class="title">
-						{$v[catname]}
-					</div>
-					<div class="cont">
-						{$v[summary]}
-					</div>
-				</div>
-		</a>
-{/if}
-{/loop} 
-				</div>
-				<div class="cimglistrb">
-{loop $xuanfei $k $v}
-{if $k==2}
-                          <a href="{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}" title="{$v[catname]}">
-				<div class="img"><img src="{$v[thumb]}" alt="{$v[catname]}"/></div>
-				<div class="cfont">
-					<div class="title">
-						{$v[catname]}
-					</div>
-					<div class="cont">
-						{$v[summary]}
-					</div>
-				</div>
-		</a>
-{/if}
-{/loop}
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="chongshe kexue">
-		<div class="ctitle">
-		<a href="/news/list.php?catid=7" title="科学喂养">
-				科学喂养
-				<span class="more">查看更多 ></span>
-		</a>
-		</div>
-		<div class="cimglist">
-			<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <!--{php $kexue=tag("table=article_21&condition=status=3 and level=1&order=paixu desc,edittime desc&template=null&pagesize=5");}-->   
-{loop $kexue $i $t}
-<div class="swiper-slide"><a href='/news/{$t[linkurl]}' title='{$t[title]}'><img src="{$t[thumb]}" alt="{$t[title]}" /></a></div>
-{/loop}
-    </div>
-    <div class="swiper-pagination"></div>
-  </div>
-		</div>
-	</div>
-	
-<script> 
-  var mySwiper = new Swiper('.kexue .swiper-container',{
-    loop: true,
-    slidesPerView: 'auto',
-    loopedSlides: 2.5,
-pagination: {
-    el: '.kexue .swiper-pagination',
-  },
-  })
-</script>
-	<div class="chongshe product">
-		<div class="ctitle">
-		<a href="/mall/" title="">
-				随便逛逛
-				<span class="more">查看更多 ></span>
-		</a>
-		</div>
-		<div class="cimglist fixed">
-        <!--{php $product=tag("table=mall_16&condition=status=3 and level=1&order=paixu desc,edittime desc&template=null&pagesize=5");}-->   
-        {loop $product $i $t}
-			<div class="cimglistli fl">
-				<a href="/mall/{$t[linkurl]}" title="{$t[title]}">
-					<div class="img"><img src="{$t[thumb]}"/></div>
-					<div class="cfont">
-						<div class="title">
-							{$t[title]}
-						</div>
-						<div class="cont">
-							{$t[summary]}
-						</div>
-						<div class="price fixed">
-							<div class="pricel fl">
-								重量：{$t[zhongliang]}kg
-							</div>
-							<div class="pricer fl">
-                                                            {if $salespricea}
-								<span class="priceold">
-								￥{$t[price]}
-								</span>
-								<span class="pricenews">
-									￥{intval($t[price]*$salespricea)}
-								</span>
-                                                            {else}
-								<span class="pricenews">
-									￥{intval($t[price])}
-								</span>
-                                                            {/if}
-							</div>
-							
-						</div>
-					</div>
-				</a>
-			</div>
-        {/loop}
-		</div>
-	</div>
-{template 'footer'}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta http-equiv="Content-Language" content="zh-CN">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<meta name="Robots" content="all">
+{if $head_keywords}
+<meta name="keywords" content="{$head_keywords}"/>
+{/if}
+{if $head_description}
+<meta name="description" content="{$head_description}"/>
+{/if}
+	<meta name="renderer" content="webkit">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+
+	<title>     {if $seo_title}
+        {$seo_title}
+    {else}
+        {if $head_name}
+            {$head_name}
+         {/if}
+         {if $city_sitename}
+            {$city_sitename}
+         {else}
+            {$site_name}
+         {/if}
+    {/if}</title>
+
+    <link rel="stylesheet" href="{DT_MOB}static/ucss/css/swiper.min.css">
+	<link rel="stylesheet" href="{DT_MOB}static/ucss/css/style.css" />
+	<link rel="stylesheet" href="{DT_MOB}static/ucss/css/media.css" />
+	<link rel="stylesheet" href="{DT_MOB}static/css.css" />
+
+<script type="text/javascript" src="{DT_MOB}static/ucss/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{DT_MOB}static/ucss/js/script.js"></script>
+
+    <script src="{DT_MOB}static/ucss/js/swiper.min.js"></script>
+
+
+	<!--[if IE 6]>
+		<script type="text/javascript" src="script/DD_PNG.js" ></script>
+		<script type="text/javascript">
+			DD_belatedPNG.fix('div, ul, img, li, input , a');
+		</script>
+	<![endif]-->
+
+</head>
+<body>
+	<div class="header">
+		<div class="search fixed">
+<!--		<form action="" method="post">
+			<input type="submit" name="submit" value>
+			<input class="keywords" type="text" name="keywords" value="" placeholder="猫咪营养膏" />
+		</form>-->
+                    <a href="{DT_MOB}api/search.php"><input type="submit" name="submit" value>
+			<input class="keywords" type="text" name="keywords" value="" placeholder="猫咪营养膏" /></a>
+		</div>
+
+		<div class="logos fixed">
+				<!--<img class="logo" src="{DT_MOB}static/ucss/images/logo.png" alt=""/>-->
+                                <a href="{$MODULE[1][linkurl]}"><img src="{if $MODULE[$moduleid][logo]}{DT_SKIN}image/logo_{$moduleid}.gif{elseif $DT[logo]}{$DT[logo]}{else}{DT_SKIN}image/logo.gif{/if}" alt="{$DT[sitename]}"/></a>
+				<img class="logor" src="{DT_MOB}static/ucss/images/logor.png" alt=""/>
+		</div>
+	</div>
+	<div class="banner">
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <!--{php $gg1=tag("table=ad&condition=pid=1 and status=3&order=listorder ASC&template=null")}-->
+        {loop $gg1 $v}
+         <div class="swiper-slide"><a href='{$v[url]}' title='{$v[title]}'><img src="{$v[image_src]}" alt="{$v[title]}"></a></div>
+{/loop}
+    </div>
+    <div class="swiper-pagination"></div><!--分页器。如果放置在swiper-container外面，需要自定义样式。-->
+</div>
+	</div>
+	<script language="javascript"> 
+var mySwiper = new Swiper('.banner .swiper-container',{
+autoplay:true,
+loop : true,
+pagination: {
+    el: '.banner .swiper-pagination',
+  },
+})
+</script>
+<style type="text/css">
+</style>
+	<div class="acategory fixed">
+        <!--{php $acatelist=tag("table=category&condition=moduleid=23 and isshow=1&order=listorder ASC&template=null")}-->
+        {loop $acatelist $v}
+<div class="acatelist">
+			<a href='{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}' title='{$v[catname]}'>
+			<div class="img">
+				<img src="{$v[thumb]}" alt="{$v[catname]}"/>
+			</div>
+			<div class="title">
+					{$v[catname]}	
+			</div>
+			</a>
+		</div>
+{/loop}
+	</div>
+	<div class="chongshe">
+		<div class="ctitle">
+		<a href="/chongshetuijian/" title="宠舍推荐">
+				宠舍推荐
+				<span class="more">查看更多 ></span>
+		</a>
+		</div>
+		<div class="cimglist">
+
+<div id="certify">
+<div class="swiper-container">
+<div class="swiper-wrapper">
+<!--{php $chongshe=tag("table=article_24&condition=status=3 and level=1&order=paixu desc,edittime desc&template=null&pagesize=5");}-->   
+{loop $chongshe $i $t}
+<div class="swiper-slide"><a href='/chongshetuijian/{$t[linkurl]}' title='{$t[title]}'><img src="{$t[thumb]}" /><p>{$t[title]}</p></a></div>
+{/loop}
+</div>
+</div>
+<div class="swiper-pagination"></div>
+<div class="swiper-button-prev"></div>
+<div class="swiper-button-next"></div>
+</div>
+<script>
+certifySwiper = new Swiper('#certify .swiper-container', {
+	watchSlidesProgress: true,
+	slidesPerView: 'auto',
+	centeredSlides: true,
+	loop: true,
+	loopedSlides: 5,
+	autoplay: true,
+	navigation: {
+		nextEl: '#certify .swiper-button-next',
+		prevEl: '#certify .swiper-button-prev',
+	},
+	pagination: {
+		el: '#certify .swiper-pagination',
+		//clickable :true,
+	},
+	on: {
+		progress: function(progress) {
+			for (i = 0; i < this.slides.length; i++) {
+				var slide = this.slides.eq(i);
+				var slideProgress = this.slides[i].progress;
+				modify = 1;
+				if (Math.abs(slideProgress) > 1) {
+					modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
+				}
+				translate = slideProgress * modify * 260 + 'px';
+				scale = 1 - Math.abs(slideProgress) / 5;
+				zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+				slide.transform('translateX(' + translate + ') scale(' + scale + ')');
+				slide.css('zIndex', zIndex);
+				slide.css('opacity', 1);
+				if (Math.abs(slideProgress) > 3) {
+					slide.css('opacity', 0);
+				}
+			}
+		},
+		setTransition: function(transition) {
+			for (var i = 0; i < this.slides.length; i++) {
+				var slide = this.slides.eq(i)
+				slide.transition(transition);
+			}
+
+		}
+	}
+
+})
+</script>
+
+
+		</div>
+	</div>
+	<div class="chongshe xuanfei">
+		<div class="ctitle">
+		<a href="/mall/" title="爱宠选配">
+				爱宠选配
+				<span class="more">查看更多 ></span>
+		</a>
+		</div>
+		<div class="cimglist fixed">
+                    
+        <!--{php $xuanfei=tag("table=category&condition=moduleid=16 and isshow=1&order=listorder ASC&template=null")}-->
+			<div class="cimglistl fl">
+{loop $xuanfei $k $v}
+{if $k==0}
+                          <a href="{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}" title="{$v[catname]}">
+				<div class="img"><img src="{$v[thumb]}" alt="{$v[catname]}"/></div>
+				<div class="cfont">
+					<div class="title">
+						{$v[catname]}
+					</div>
+					<div class="cont">
+						{$v[summary]}
+					</div>
+				</div>
+		</a>
+{/if}
+{/loop}  
+                            
+			</div>
+			<div class="cimglistr fl">
+				<div class="cimglistrt">
+                                    {loop $xuanfei $k $v}
+{if $k==1}
+                          <a href="{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}" title="{$v[catname]}">
+				<div class="img"><img src="{$v[thumb]}" alt="{$v[catname]}"/></div>
+				<div class="cfont">
+					<div class="title">
+						{$v[catname]}
+					</div>
+					<div class="cont">
+						{$v[summary]}
+					</div>
+				</div>
+		</a>
+{/if}
+{/loop} 
+				</div>
+				<div class="cimglistrb">
+{loop $xuanfei $k $v}
+{if $k==2}
+                          <a href="{$MODULE[$v[moduleid]][linkurl]}{$v[linkurl]}" title="{$v[catname]}">
+				<div class="img"><img src="{$v[thumb]}" alt="{$v[catname]}"/></div>
+				<div class="cfont">
+					<div class="title">
+						{$v[catname]}
+					</div>
+					<div class="cont">
+						{$v[summary]}
+					</div>
+				</div>
+		</a>
+{/if}
+{/loop}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="chongshe kexue">
+		<div class="ctitle">
+		<a href="/news/list.php?catid=7" title="科学喂养">
+				科学喂养
+				<span class="more">查看更多 ></span>
+		</a>
+		</div>
+		<div class="cimglist">
+			<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <!--{php $kexue=tag("table=article_21&condition=status=3 and level=1&order=paixu desc,edittime desc&template=null&pagesize=5");}-->   
+{loop $kexue $i $t}
+<div class="swiper-slide"><a href='/news/{$t[linkurl]}' title='{$t[title]}'><img src="{$t[thumb]}" alt="{$t[title]}" /></a></div>
+{/loop}
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+		</div>
+	</div>
+	
+<script> 
+  var mySwiper = new Swiper('.kexue .swiper-container',{
+    loop: true,
+    slidesPerView: 'auto',
+    loopedSlides: 2.5,
+pagination: {
+    el: '.kexue .swiper-pagination',
+  },
+  })
+</script>
+	<div class="chongshe product">
+		<div class="ctitle">
+		<a href="/mall/" title="">
+				随便逛逛
+				<span class="more">查看更多 ></span>
+		</a>
+		</div>
+		<div class="cimglist fixed">
+        <!--{php $product=tag("table=mall_16&condition=status=3 and level=1&order=paixu desc,edittime desc&template=null&pagesize=5");}-->   
+        {loop $product $i $t}
+			<div class="cimglistli fl">
+				<a href="/mall/{$t[linkurl]}" title="{$t[title]}">
+					<div class="img"><img src="{$t[thumb]}"/></div>
+					<div class="cfont">
+						<div class="title">
+							{$t[title]}
+						</div>
+						<div class="cont">
+							{$t[summary]}
+						</div>
+						<div class="price fixed">
+							<div class="pricel fl">
+								重量：{$t[zhongliang]}kg
+							</div>
+							<div class="pricer fl">
+                                                            {if $salespricea}
+								<span class="priceold">
+								￥{$t[price]}
+								</span>
+								<span class="pricenews">
+									￥{intval($t[price]*$salespricea)}
+								</span>
+                                                            {else}
+								<span class="pricenews">
+									￥{intval($t[price])}
+								</span>
+                                                            {/if}
+							</div>
+							
+						</div>
+					</div>
+				</a>
+			</div>
+        {/loop}
+		</div>
+	</div>
+{template 'footer'}

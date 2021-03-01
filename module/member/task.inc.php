@@ -1,3 +1,3 @@
-<?php 
-defined('IN_DESTOON') or exit('Access Denied');
+<?php 
+defined('IN_DESTOON') or exit('Access Denied');
 ?>

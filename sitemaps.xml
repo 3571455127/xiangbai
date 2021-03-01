@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://baixiang.com/</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/</loc>
+<lastmod>2021-02-23</lastmod>
 <changefreq>always</changefreq>
 <priority>1.0</priority>
 <data>
@@ -11,8 +11,8 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/mall/</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/mall/</loc>
+<lastmod>2021-02-23</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.9</priority>
 <data>
@@ -21,8 +21,8 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/company/</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/company/</loc>
+<lastmod>2021-02-23</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.9</priority>
 <data>
@@ -31,8 +31,8 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/group/</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/group/</loc>
+<lastmod>2021-02-23</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.9</priority>
 <data>
@@ -41,8 +41,8 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/know/</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/know/</loc>
+<lastmod>2021-02-23</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.9</priority>
 <data>
@@ -51,8 +51,8 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/photo/</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/photo/</loc>
+<lastmod>2021-02-23</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.9</priority>
 <data>
@@ -61,8 +61,8 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/video/</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/video/</loc>
+<lastmod>2021-02-23</lastmod>
 <changefreq>hourly</changefreq>
 <priority>0.9</priority>
 <data>
@@ -71,7 +71,17 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/mall/show.php?itemid=3</loc>
+<loc>http://xiangbai.com/mall/show.php?itemid=3</loc>
+<lastmod>2021-02-20</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+<data>
+<display>
+</display>
+</data>
+</url>
+<url>
+<loc>http://xiangbai.com/mall/show.php?itemid=2</loc>
 <lastmod>2021-02-19</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>
@@ -81,8 +91,8 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/mall/show.php?itemid=2</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/mall/show.php?itemid=1</loc>
+<lastmod>2021-02-20</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>
 <data>
@@ -91,8 +101,8 @@
 </data>
 </url>
 <url>
-<loc>http://baixiang.com/mall/show.php?itemid=1</loc>
-<lastmod>2021-02-19</lastmod>
+<loc>http://xiangbai.com/com/test/</loc>
+<lastmod>2021-02-23</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>
 <data>

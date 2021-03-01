@@ -1,1 +1,1 @@
-var DTPath = "http://baixiang.com/";var DTMob = "http://baixiang.com/mobile/";var SKPath = "http://baixiang.com/skin/default/";var MEPath = "http://baixiang.com/member/";var DTEditor = "kindeditor";var CKDomain = "";var CKPath = "/";var CKPrex = "coy_";
+var DTPath = "http://xiangbai.com/";var DTMob = "http://xiangbai.com/mobile/";var SKPath = "http://xiangbai.com/skin/default/";var MEPath = "http://xiangbai.com/member/";var DTEditor = "kindeditor";var CKDomain = "";var CKPath = "/";var CKPrex = "coy_";
